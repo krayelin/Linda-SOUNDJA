@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linda Soundja Moga — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --noir: #0a0a0a;
+  --blanc: #f5f2ed;
+  --violet: #6B4FBB;
+  --violet-light: #9B7FE8;
+  --violet-pale: #EAE5F8;
+  --or: #C8A96E;
+  --gris: #888580;
+  --gris-light: #e8e4de;
+  --rouge: #C85040;
+  --vert: #2E7D5E;
+  --bleu: #2A5FA8;
+  --amber: #C8820A;
+  --r: 1rem;
+  --r2: 1.5rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--noir);
+  color: var(--blanc);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom cursor */
+.cursor {
+  position: fixed; width: 8px; height: 8px;
+  background: var(--violet-light); border-radius: 50%;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width .2s, height .2s, background .2s;
+  mix-blend-mode: screen;
+}
+.cursor-ring {
+  position: fixed; width: 36px; height: 36px;
+  border: 1px solid rgba(155,127,232,.4);
+  border-radius: 50%; pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform .08s, width .2s, height .2s;
+}
+a:hover ~ .cursor, button:hover ~ .cursor { width: 16px; height: 16px; }
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0; opacity: .4;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  backdrop-filter: blur(20px);
+  background: rgba(10,10,10,.7);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 300; letter-spacing: .15em;
+  color: var(--blanc); text-decoration: none;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--gris); text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--blanc); }
+.nav-cta {
+  font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--violet-light); text-decoration: none;
+  border: 1px solid rgba(155,127,232,.4); padding: .4rem 1rem;
+  transition: all .2s;
+}
+.nav-cta:hover { background: var(--violet-light); color: var(--noir); }
+
+/* HERO */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 0 3rem 4rem;
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(107,79,187,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(107,79,187,.06) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.hero-orb {
+  position: absolute; width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(107,79,187,.18) 0%, transparent 70%);
+  top: -100px; right: -100px; pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: .72rem; color: var(--violet-light); letter-spacing: .15em;
+  margin-bottom: 1.5rem;
+}
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-weight: 300; line-height: .9;
+  letter-spacing: -.02em;
+  margin-bottom: 2rem;
+}
+.hero-name em { font-style: italic; color: var(--violet-light); }
+.hero-sub {
+  max-width: 480px;
+  font-size: .9rem; font-weight: 400; line-height: 1.7;
+  color: rgba(245,242,237,.6);
+  margin-bottom: 3rem;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: .6rem;
+  background: var(--violet); color: var(--blanc);
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: .9rem 2rem; text-decoration: none;
+  transition: all .25s; position: relative; overflow: hidden;
+}
+.btn-primary::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--violet-light); opacity: 0;
+  transition: opacity .2s;
+}
+.btn-primary:hover::after { opacity: .2; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: .6rem;
+  border: 1px solid rgba(255,255,255,.2); color: var(--blanc);
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: .9rem 2rem; text-decoration: none;
+  transition: all .25s;
+}
+.btn-secondary:hover { border-color: var(--violet-light); color: var(--violet-light); }
+.hero-scroll {
+  position: absolute; bottom: 2rem; right: 3rem;
+  font-family: 'DM Mono', monospace; font-size: .65rem;
+  color: var(--gris); letter-spacing: .1em;
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+}
+.hero-scroll::after {
+  content: ''; width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--gris), transparent);
+  animation: scrollLine 1.5s ease-in-out infinite;
+}
+@keyframes scrollLine { 0%,100%{transform:scaleY(1);opacity:1} 50%{transform:scaleY(.5);opacity:.4} }
+
+.hero-stats {
+  position: absolute; right: 3rem; top: 50%;
+  transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 2rem;
+}
+.stat { text-align: right; }
+.stat-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-weight: 300; color: var(--violet-light);
+  line-height: 1;
+}
+.stat-l {
+  font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--gris); margin-top: .2rem;
+}
+
+/* SECTIONS */
+section { position: relative; z-index: 1; }
+
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--violet-light); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300; line-height: 1.1;
+}
+.section-title em { font-style: italic; color: var(--violet-light); }
+
+hr.divider {
+  border: none; border-top: 1px solid rgba(255,255,255,.08);
+  margin: 0;
+}
+
+/* NAVIGATION DOUBLE */
+#nav-double {
+  padding: 5rem 3rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  background: rgba(255,255,255,.05);
+}
+.nav-card {
+  background: var(--noir); padding: 4rem 3rem;
+  display: flex; flex-direction: column;
+  cursor: pointer; position: relative; overflow: hidden;
+  transition: background .3s;
+}
+.nav-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(107,79,187,.08), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.nav-card:hover::before { opacity: 1; }
+.nav-card:hover { background: #111; }
+.nav-card-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 6rem; font-weight: 300; line-height: 1;
+  color: rgba(255,255,255,.05); position: absolute;
+  top: 1rem; right: 2rem;
+}
+.nav-card-label {
+  font-family: 'DM Mono', monospace; font-size: .65rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--violet-light); margin-bottom: .8rem;
+}
+.nav-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 300; margin-bottom: 1rem;
+}
+.nav-card-desc { font-size: .85rem; color: var(--gris); line-height: 1.6; max-width: 320px; }
+.nav-card-arrow {
+  margin-top: 2rem; font-size: 1.5rem; color: var(--violet-light);
+  transition: transform .2s;
+}
+.nav-card:hover .nav-card-arrow { transform: translateX(8px); }
+
+/* EXPERIENCES */
+#experiences { padding: 6rem 3rem; }
+.exp-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 4rem; padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.exp-list { display: flex; flex-direction: column; gap: 0; }
+.exp-item {
+  display: grid; grid-template-columns: 80px 1fr 280px;
+  gap: 2rem; padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  position: relative; cursor: pointer;
+  transition: padding-left .3s;
+}
+.exp-item::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 0; background: var(--violet);
+  transition: width .3s;
+}
+.exp-item:hover::before { width: 3px; }
+.exp-item:hover { padding-left: 1rem; }
+.exp-num {
+  font-family: 'DM Mono', monospace; font-size: .65rem;
+  color: var(--gris); padding-top: .3rem;
+}
+.exp-body {}
+.exp-tags { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: .8rem; }
+.tag {
+  font-size: .62rem; letter-spacing: .08em; text-transform: uppercase;
+  padding: .2rem .7rem;
+  border: 1px solid transparent;
+}
+.tag-violet { border-color: rgba(107,79,187,.4); color: var(--violet-light); }
+.tag-vert   { border-color: rgba(46,125,94,.4);  color: #6BC99A; }
+.tag-bleu   { border-color: rgba(42,95,168,.4);  color: #7AABF0; }
+.tag-or     { border-color: rgba(200,169,110,.4); color: var(--or); }
+.exp-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 400; margin-bottom: .5rem;
+}
+.exp-org {
+  font-size: .78rem; color: var(--violet-light); letter-spacing: .05em;
+  margin-bottom: .8rem;
+}
+.exp-desc { font-size: .83rem; color: rgba(245,242,237,.55); line-height: 1.7; max-width: 480px; }
+.exp-meta { display: flex; flex-direction: column; gap: .8rem; align-items: flex-end; padding-top: .3rem; }
+.exp-date {
+  font-family: 'DM Mono', monospace; font-size: .65rem;
+  color: var(--gris);
+}
+.exp-comp-list { display: flex; flex-direction: column; gap: .4rem; align-items: flex-end; }
+.exp-comp {
+  font-size: .65rem; letter-spacing: .06em;
+  padding: .2rem .7rem;
+  background: rgba(107,79,187,.12);
+  color: var(--violet-light);
+}
+
+/* COMPETENCES */
+#competences { padding: 6rem 3rem; background: #080808; }
+.comp-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 4rem; padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; }
+.comp-card {
+  background: #0d0d0d; padding: 2.5rem;
+  position: relative; overflow: hidden;
+  cursor: pointer; transition: background .3s;
+}
+.comp-card:hover { background: #141414; }
+.comp-card-full { grid-column: span 2; }
+.comp-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.comp-icon {
+  font-size: 1.4rem; margin-bottom: 1.2rem;
+}
+.comp-ue {
+  font-family: 'DM Mono', monospace; font-size: .62rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--gris); margin-bottom: .5rem;
+}
+.comp-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; font-weight: 400; margin-bottom: .5rem;
+}
+.comp-level {
+  font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.comp-bar {
+  height: 2px; background: rgba(255,255,255,.08);
+  margin-bottom: 1.5rem; position: relative;
+}
+.comp-bar-fill {
+  position: absolute; left: 0; top: 0; height: 100%;
+  transition: width 1.2s cubic-bezier(.16,1,.3,1);
+}
+.comp-desc { font-size: .82rem; color: var(--gris); line-height: 1.65; margin-bottom: 1.2rem; }
+.comp-proof {
+  font-size: .72rem; color: rgba(245,242,237,.35);
+  font-style: italic;
+}
+.comp-proof span {
+  color: var(--violet-light); font-style: normal;
+  font-family: 'DM Mono', monospace; font-size: .65rem;
+}
+.level-dots {
+  display: flex; gap: .35rem; margin-bottom: 1rem;
+}
+.dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,.12);
+}
+.dot.filled { background: var(--violet-light); }
+
+/* ABOUT + PERSO */
+#about { padding: 6rem 3rem; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
+.about-text { }
+.about-text p { font-size: .9rem; color: rgba(245,242,237,.65); line-height: 1.8; margin-bottom: 1.2rem; }
+.about-text strong { color: var(--blanc); font-weight: 500; }
+.interests { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.interest-card {
+  border: 1px solid rgba(255,255,255,.06); padding: 1.5rem;
+  position: relative; overflow: hidden;
+}
+.interest-card::before {
+  content: attr(data-icon);
+  position: absolute; bottom: -.5rem; right: .5rem;
+  font-size: 3rem; opacity: .04;
+}
+.interest-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 400; margin-bottom: .4rem;
+}
+.interest-desc { font-size: .75rem; color: var(--gris); line-height: 1.5; }
+.langues { margin-top: 2rem; }
+.langue-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .7rem 0; border-bottom: 1px solid rgba(255,255,255,.06);
+  font-size: .85rem;
+}
+.langue-level { font-family: 'DM Mono', monospace; font-size: .65rem; color: var(--violet-light); }
+
+/* CV & CONTACT */
+#contact {
+  padding: 6rem 3rem 4rem;
+  background: linear-gradient(180deg, #080808, var(--noir));
+  text-align: center;
+}
+.contact-inner { max-width: 640px; margin: 0 auto; }
+.contact-inner .section-title { margin-bottom: 1rem; }
+.contact-sub { font-size: .9rem; color: var(--gris); line-height: 1.7; margin-bottom: 3rem; }
+.contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+.contact-link {
+  display: flex; align-items: center; gap: .5rem;
+  font-family: 'DM Mono', monospace; font-size: .75rem;
+  color: var(--blanc); text-decoration: none;
+  padding: .7rem 1.5rem; border: 1px solid rgba(255,255,255,.12);
+  transition: all .2s;
+}
+.contact-link:hover { border-color: var(--violet-light); color: var(--violet-light); }
+.cv-block {
+  border: 1px solid rgba(107,79,187,.3);
+  padding: 2.5rem; margin-bottom: 2rem;
+  position: relative; overflow: hidden;
+}
+.cv-block::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--violet-light), transparent);
+}
+.cv-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 300; margin-bottom: .5rem;
+}
+.cv-sub { font-size: .78rem; color: var(--gris); margin-bottom: 1.5rem; }
+
+/* FOOTER */
+footer {
+  padding: 1.5rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,.06);
+  font-size: .65rem; color: var(--gris); letter-spacing: .08em;
+}
+
+/* ANIMATIONS */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+.hero-eyebrow { animation: fadeUp .8s ease .2s both; }
+.hero-name    { animation: fadeUp .8s ease .4s both; }
+.hero-sub     { animation: fadeUp .8s ease .6s both; }
+.hero-actions { animation: fadeUp .8s ease .8s both; }
+.hero-stats   { animation: fadeUp .8s ease 1s both; }
+
+/* PITCH VIDEO */
+#pitch { padding: 5rem 3rem; background: #080808; }
+.pitch-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+}
+.pitch-video-frame {
+  aspect-ratio: 16/9; background: #111;
+  border: 1px solid rgba(107,79,187,.2);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1rem;
+  position: relative; overflow: hidden;
+}
+.pitch-video-frame::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(107,79,187,.06), transparent);
+}
+.play-btn {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 1px solid rgba(155,127,232,.5);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .2s;
+  color: var(--violet-light); font-size: 1.2rem;
+}
+.play-btn:hover { background: rgba(155,127,232,.1); transform: scale(1.05); }
+.pitch-note {
+  font-family: 'DM Mono', monospace; font-size: .65rem;
+  color: var(--gris); text-align: center;
+}
+
+/* TRACE = PREUVE */
+.trace-block {
+  margin-top: 1.5rem; padding: 1.5rem;
+  background: rgba(255,255,255,.02);
+  border-left: 2px solid var(--violet);
+}
+.trace-label {
+  font-family: 'DM Mono', monospace; font-size: .62rem;
+  color: var(--violet-light); letter-spacing: .12em; text-transform: uppercase;
+  margin-bottom: .6rem;
+}
+.trace-items { display: flex; flex-direction: column; gap: .4rem; }
+.trace-item {
+  font-size: .8rem; color: rgba(245,242,237,.5);
+  display: flex; align-items: baseline; gap: .5rem;
+}
+.trace-item::before { content: '→'; color: var(--violet-light); flex-shrink: 0; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  #hero { padding: 0 1.5rem 3rem; }
+  .hero-stats { display: none; }
+  #nav-double { grid-template-columns: 1fr; }
+  .exp-item { grid-template-columns: 1fr; }
+  .exp-meta { align-items: flex-start; }
+  .comp-grid { grid-template-columns: 1fr; }
+  .comp-card-full { grid-column: span 1; }
+  .about-grid { grid-template-columns: 1fr; }
+  .pitch-inner { grid-template-columns: 1fr; }
+  #hero, #experiences, #competences, #about, #contact, #pitch { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .exp-header, .comp-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">L. SOUNDJA MOGA</a>
+  <ul class="nav-links">
+    <li><a href="#pitch">Pitch</a></li>
+    <li><a href="#experiences">Expériences</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#about">Profil</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">CV →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-orb"></div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-n">3</div>
+      <div class="stat-l">ans d'expérience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">5</div>
+      <div class="stat-l">compétences GC2F</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">40+</div>
+      <div class="stat-l">pays — Natixis</div>
+    </div>
+  </div>
+
+  <div class="hero-eyebrow">BUT 3 GEA · Gestion Comptable, Fiscale & Financière · 2025–2026</div>
+  <h1 class="hero-name">
+    Linda<br><em>Soundja</em><br>Moga
+  </h1>
+  <p class="hero-sub">
+    Alternante Contrôle, Audit & Gestion des Risques chez Natixis CIB.<br>
+    Future étudiante en Master MBFA — Risques, Contrôle et Conformité.
+  </p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#experiences">Explorer mes expériences →</a>
+    <a class="btn-secondary" href="#competences">Explorer mes compétences →</a>
+  </div>
+
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<hr class="divider">
+
+<!-- DOUBLE NAVIGATION -->
+<div id="nav-double">
+  <div class="nav-card" onclick="document.getElementById('experiences').scrollIntoView({behavior:'smooth'})">
+    <div class="nav-card-number">01</div>
+    <div class="nav-card-label">Approche n°1</div>
+    <div class="nav-card-title">Par Expériences</div>
+    <div class="nav-card-desc">Découvrez mes missions chez Natixis, mes projets académiques SAÉ et mes engagements.</div>
+    <div class="nav-card-arrow">→</div>
+  </div>
+  <div class="nav-card" onclick="document.getElementById('competences').scrollIntoView({behavior:'smooth'})">
+    <div class="nav-card-number">02</div>
+    <div class="nav-card-label">Approche n°2</div>
+    <div class="nav-card-title">Par Compétences</div>
+    <div class="nav-card-desc">Les 5 UE du BUT GC2F avec mes niveaux de maîtrise et les preuves associées.</div>
+    <div class="nav-card-arrow">→</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PITCH VIDEO -->
+<section id="pitch">
+  <div class="pitch-inner">
+    <div>
+      <div class="section-label reveal">Pitch de présentation</div>
+      <h2 class="section-title reveal">Qui<br>suis-je ?</h2>
+      <div style="margin-top:1.5rem">
+        <p class="reveal" style="font-size:.88rem;color:rgba(245,242,237,.6);line-height:1.8;margin-bottom:1rem">
+          En moins de 2 minutes, je vous présente mon parcours, mes choix, et ce qui me motive à intégrer un Master en Risques et Conformité.
+        </p>
+        <p class="reveal" style="font-size:.88rem;color:rgba(245,242,237,.6);line-height:1.8">
+          <strong style="color:var(--blanc)">Mon fil directeur :</strong> la mode m'apprend que derrière chaque pièce irréprochable, il y a une rigueur invisible. C'est exactement ce que je fais en contrôle : chaque flux vérifié est un point de couture que personne ne voit, mais qui tient tout ensemble.
+        </p>
+      </div>
+    </div>
+    <div>
+      <div class="pitch-video-frame reveal">
+        <div class="play-btn">▶</div>
+        <div class="pitch-note">Pitch vidéo — à intégrer</div>
+      </div>
+      <p style="font-size:.7rem;color:var(--gris);margin-top:.8rem;font-family:'DM Mono',monospace">
+        Remplacer par votre vidéo Wix / YouTube / Vimeo embarquée
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCES -->
+<section id="experiences">
+  <div class="exp-header reveal">
+    <div>
+      <div class="section-label">Approche n°1</div>
+      <h2 class="section-title">Mes <em>expériences</em></h2>
+    </div>
+    <div style="font-size:.78rem;color:var(--gris);max-width:280px;text-align:right;line-height:1.6">
+      3 expériences marquantes · de la plus récente à la plus ancienne
+    </div>
+  </div>
+
+  <div class="exp-list">
+
+    <!-- EXP 1 : NATIXIS -->
+    <div class="exp-item reveal" onclick="document.location='#exp1-detail'">
+      <div class="exp-num">001</div>
+      <div class="exp-body">
+        <div class="exp-tags">
+          <span class="tag tag-violet">Analyser N3</span>
+          <span class="tag tag-violet">Décider N3</span>
+          <span class="tag tag-or">Piloter N3</span>
+          <span class="tag tag-vert">Évaluer N2</span>
+        </div>
+        <h3 class="exp-title">Contrôleur Conformité & Risques LCB-FT</h3>
+        <div class="exp-org">Natixis CIB · Oversight & Control · Charenton-le-Pont</div>
+        <p class="exp-desc">
+          Réalisation des contrôles réglementaires LCB-FT sur les flux internationaux (Correspondent Banking, Flux Entreprises). Harmonisation des processus entre Natixis EMEA et APAC. Automatisation des reportings sous Excel/VBA. Gestion des incidents robotiques et suivi des flux bloqués FIRCO.
+        </p>
+        <div class="trace-block" id="exp1-detail">
+          <div class="trace-label">Traces → Preuves</div>
+          <div class="trace-items">
+            <div class="trace-item">Slide "Harmonisation APAC/EMEA" — initiative stratégique inter-régions</div>
+            <div class="trace-item">Capture Excel VBA avant/après automatisation du reporting</div>
+            <div class="trace-item">Tableau de suivi des incidents robotiques (anonymisé)</div>
+            <div class="trace-item">Processus FIRCO → STF → Secfin schématisé</div>
+          </div>
+        </div>
+      </div>
+      <div class="exp-meta">
+        <div class="exp-date">Sept. 2023 → Aujourd'hui</div>
+        <div class="exp-comp-list">
+          <div class="exp-comp">Alternance · 2 ans</div>
+          <div class="exp-comp">Power BI · VBA · Excel</div>
+          <div class="exp-comp">FIRCO · Toge · Sésame</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXP 2 : FASHION TRACK -->
+    <div class="exp-item reveal">
+      <div class="exp-num">002</div>
+      <div class="exp-body">
+        <div class="exp-tags">
+          <span class="tag tag-vert">Produire N2</span>
+          <span class="tag tag-vert">Évaluer N2</span>
+          <span class="tag tag-bleu">Piloter N2</span>
+          <span class="tag tag-violet">Analyser N3</span>
+        </div>
+        <h3 class="exp-title">SAÉ Fashion Track — Création d'entreprise</h3>
+        <div class="exp-org">BUT 3 GEA · IUT Paris-Rives de Seine</div>
+        <p class="exp-desc">
+          Conception d'une application de recherche de vêtements par photo. Élaboration de la stratégie tarifaire à partir d'une enquête (143 répondants, prix moyen 5€ TTC / 4,17€ HT). Réalisation du budget de trésorerie prévisionnel.
+        </p>
+        <div class="trace-block">
+          <div class="trace-label">Traces → Preuves</div>
+          <div class="trace-items">
+            <div class="trace-item">Maquette app Fashion Track (captures annotées)</div>
+            <div class="trace-item">Enquête tarifaire : graphique camembert + tableau Excel résultats</div>
+            <div class="trace-item">Budget trésorerie — version "avant" vs "après correction" côte à côte</div>
+          </div>
+        </div>
+      </div>
+      <div class="exp-meta">
+        <div class="exp-date">2025–2026</div>
+        <div class="exp-comp-list">
+          <div class="exp-comp">SAÉ projet création</div>
+          <div class="exp-comp">Excel · Trésorerie</div>
+          <div class="exp-comp">Stratégie tarifaire</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXP 3 : MGC -->
+    <div class="exp-item reveal">
+      <div class="exp-num">003</div>
+      <div class="exp-body">
+        <div class="exp-tags">
+          <span class="tag tag-bleu">Produire N1</span>
+          <span class="tag tag-bleu">Analyser N2</span>
+        </div>
+        <h3 class="exp-title">Gestionnaire Frais de Santé</h3>
+        <div class="exp-org">Mutuelle MGC · Paris 13ème</div>
+        <p class="exp-desc">
+          Contrôle et validation des dossiers d'adhésion et de remboursement. Traitement des demandes clients. Calcul et saisie des prestations selon les barèmes réglementaires.
+        </p>
+        <div class="trace-block">
+          <div class="trace-label">Traces → Preuves</div>
+          <div class="trace-items">
+            <div class="trace-item">Attestation employeur + missions détaillées</div>
+            <div class="trace-item">Exemple anonymisé de traitement dossier</div>
+          </div>
+        </div>
+      </div>
+      <div class="exp-meta">
+        <div class="exp-date">Juil. – Août 2023</div>
+        <div class="exp-comp-list">
+          <div class="exp-comp">CDD · 2 mois</div>
+          <div class="exp-comp">Contrôle · Conformité</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- COMPETENCES -->
+<section id="competences">
+  <div class="comp-header reveal">
+    <div>
+      <div class="section-label">Approche n°2</div>
+      <h2 class="section-title">Mes <em>compétences</em></h2>
+    </div>
+    <div style="font-size:.78rem;color:var(--gris);max-width:280px;text-align:right;line-height:1.6">
+      5 UE du BUT GC2F · niveaux de maîtrise · preuves associées
+    </div>
+  </div>
+
+  <div class="comp-grid">
+
+    <!-- ANALYSER N3 -->
+    <div class="comp-card reveal">
+      <div class="comp-accent" style="background:var(--violet)"></div>
+      <div class="comp-icon">🔍</div>
+      <div class="comp-ue">Compétence 1</div>
+      <div class="comp-name">Analyser</div>
+      <div class="level-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+      </div>
+      <div class="comp-level" style="color:var(--violet-light)">Niveau 3 — Conseiller pour l'amélioration des processus</div>
+      <div class="comp-bar"><div class="comp-bar-fill bar-anim" data-width="100" style="background:var(--violet-light);width:0"></div></div>
+      <div class="comp-desc">Analyser les enjeux économiques et juridiques, évaluer les processus, proposer des améliorations dans des organisations de tailles et espaces géographiques différents.</div>
+      <div class="comp-proof">Preuve principale : <span>Projet APAC CBK — Natixis</span><br>Harmonisation des contrôles EMEA/Asie-Pacifique, analyse des écarts réglementaires, proposition de standards unifiés.</div>
+    </div>
+
+    <!-- DÉCIDER N3 -->
+    <div class="comp-card reveal">
+      <div class="comp-accent" style="background:var(--vert)"></div>
+      <div class="comp-icon">⚖️</div>
+      <div class="comp-ue">Compétence 2</div>
+      <div class="comp-name">Décider</div>
+      <div class="level-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+      </div>
+      <div class="comp-level" style="color:#6BC99A">Niveau 3 — Concourir à la prise de décision</div>
+      <div class="comp-bar"><div class="comp-bar-fill bar-anim" data-width="100" style="background:#6BC99A;width:0"></div></div>
+      <div class="comp-desc">Utiliser un SIG adapté, exploiter les données qualitatives et quantitatives, identifier et évaluer les risques, participer à la prise de décision en tenant compte des contraintes.</div>
+      <div class="comp-proof">Preuve principale : <span>Gestion flux FIRCO — Natixis</span><br>Identification des transactions suspectes, arbitrage STF/Secfin, traçabilité des décisions réglementaires.</div>
+    </div>
+
+    <!-- PILOTER N3 -->
+    <div class="comp-card reveal">
+      <div class="comp-accent" style="background:var(--or)"></div>
+      <div class="comp-icon">🧭</div>
+      <div class="comp-ue">Compétence 3</div>
+      <div class="comp-name">Piloter</div>
+      <div class="level-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div>
+      </div>
+      <div class="comp-level" style="color:var(--or)">Niveau 3 — Améliorer les relations entre parties prenantes</div>
+      <div class="comp-bar"><div class="comp-bar-fill bar-anim" data-width="100" style="background:var(--or);width:0"></div></div>
+      <div class="comp-desc">Coordonner les relations interpersonnelles et collectives, utiliser les outils de collaboration, combiner les méthodes de communication en lien avec la stratégie.</div>
+      <div class="comp-proof">Preuve principale : <span>Coordination EMEA ↔ APAC — Natixis</span><br>Interface entre équipes France, Portugal et Asie-Pacifique. Également : mentorat lycée Paul Émile Victor + bénévolat MaMaMa.</div>
+    </div>
+
+    <!-- PRODUIRE N2 -->
+    <div class="comp-card reveal">
+      <div class="comp-accent" style="background:var(--bleu)"></div>
+      <div class="comp-icon">📊</div>
+      <div class="comp-ue">Compétence 4</div>
+      <div class="comp-name">Produire</div>
+      <div class="level-dots">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+      </div>
+      <div class="comp-level" style="color:#7AABF0">Niveau 2 — Optimiser l'information comptable, fiscale et sociale</div>
+      <div class="comp-bar"><div class="comp-bar-fill bar-anim" data-width="66" style="background:#7AABF0;width:0"></div></div>
+      <div class="comp-desc">Résoudre les problèmes comptables spécifiques, appliquer les règles fiscales et sociales adaptées, sécuriser l'information comptable produite.</div>
+      <div class="comp-proof">Preuve principale : <span>Budget trésorerie Fashion Track</span><br>Construction du tableau de flux mensuel (CA HT, TVA, frais de fonctionnement). Correction et optimisation du modèle initial.</div>
+    </div>
+
+    <!-- ÉVALUER N2 — pleine largeur -->
+    <div class="comp-card comp-card-full reveal">
+      <div class="comp-accent" style="background:var(--rouge)"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem">
+        <div>
+          <div class="comp-icon">📈</div>
+          <div class="comp-ue">Compétence 5</div>
+          <div class="comp-name">Évaluer</div>
+          <div class="level-dots">
+            <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div>
+          </div>
+          <div class="comp-level" style="color:#F08080">Niveau 2 — Optimiser les outils d'analyse et de prévision</div>
+          <div class="comp-bar" style="max-width:320px"><div class="comp-bar-fill bar-anim" data-width="66" style="background:#F08080;width:0"></div></div>
+          <div class="comp-desc">Mettre en place les sources de financement, réaliser la gestion de trésorerie sur le court terme, budgets d'exploitation et bilans prévisionnels, évaluer les résultats par le contrôle budgétaire.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;justify-content:space-between">
+          <div class="comp-proof" style="margin-top:2rem">
+            Preuve principale : <span>Stratégie tarifaire Fashion Track</span><br>
+            Enquête terrain (143 répondants), calcul prix moyen pondéré (3,99×92 + 5,99×40 + 9,99×11 / 143 = 5,00€ TTC / 4,17€ HT). Identification de la viabilité économique.<br><br>
+            Preuve complémentaire : <span>Power BI & VBA — Natixis</span><br>
+            Automatisation des reportings réglementaires, tableaux de bord de suivi des flux bloqués.
+          </div>
+          <div style="margin-top:1.5rem;padding:.8rem 1rem;border:1px solid rgba(240,128,128,.15);font-size:.72rem;color:rgba(240,128,128,.7)">
+            Goldman Sachs Controller Virtual Experience (Forage) — formation complémentaire en analyse financière
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- À PROPOS -->
+<section id="about">
+  <div class="section-label reveal">Profil</div>
+  <h2 class="section-title reveal">L'humain<br>derrière <em>les chiffres</em></h2>
+
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        Future étudiante en <strong>Master MBFA parcours Risques, Contrôle et Conformité</strong> à l'Université Paris Nanterre, je prépare une alternance pour septembre 2026. Forte de 3 ans d'expérience en conformité LCB-FT chez Natixis CIB, j'ai développé une vision rigoureuse et analytique des risques financiers.
+      </p>
+      <p>
+        Ma force ? Allier la <strong>précision technique</strong> (VBA, Power BI, outils Natixis) à une capacité d'adaptation internationale, renforcée par mon expérience avec les équipes EMEA et APAC.
+      </p>
+      <p>
+        Rythme en alternance : <strong>2 semaines en cours / 2 semaines en entreprise</strong>.
+      </p>
+
+      <div class="langues">
+        <div class="langue-item">
+          <span>Français</span><span class="langue-level">Langue maternelle</span>
+        </div>
+        <div class="langue-item">
+          <span>Anglais</span><span class="langue-level">Courant — TOEIC B2</span>
+        </div>
+        <div class="langue-item">
+          <span>Espagnol</span><span class="langue-level">Intermédiaire</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="interests reveal">
+        <div class="interest-card" data-icon="👗">
+          <div class="interest-name">La Mode</div>
+          <div class="interest-desc">Art vivant et expression personnelle. Lien direct avec Fashion Track — la rigueur de la couture comme métaphore du contrôle.</div>
+        </div>
+        <div class="interest-card" data-icon="📚">
+          <div class="interest-name">La Lecture</div>
+          <div class="interest-desc">Lenoir, Shakespeare, Mme de La Fayette. Goût pour la réflexion, les valeurs humaines et l'ouverture d'esprit.</div>
+        </div>
+        <div class="interest-card" data-icon="✈️">
+          <div class="interest-name">Le Voyage</div>
+          <div class="interest-desc">Dallas, Sicile, Cameroun. Explorer d'autres cultures et façons de penser nourrit ma curiosité professionnelle.</div>
+        </div>
+        <div class="interest-card" data-icon="🤝">
+          <div class="interest-name">L'Engagement</div>
+          <div class="interest-desc">Bénévolat MaMaMa (aide alimentaire) · Mentorat au lycée Paul Émile Victor.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT & CV -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label reveal">Contact & CV</div>
+    <h2 class="section-title reveal">Travaillons<br><em>ensemble</em></h2>
+    <p class="contact-sub reveal">
+      Je recherche une alternance en Contrôle, Audit ou Gestion des Risques pour septembre 2026.<br>
+      Rythme : 2 semaines cours / 2 semaines entreprise.
+    </p>
+
+    <div class="cv-block reveal">
+      <div class="cv-title">Mon CV — Linda Soundja Moga</div>
+      <div class="cv-sub">BUT 3 GEA · Alternante Natixis CIB · Future Master MBFA Paris Nanterre</div>
+      <a class="btn-primary" href="#" style="display:inline-flex;margin:0 auto" onclick="alert('Remplacer ce lien par le lien de téléchargement de votre PDF')">
+        Télécharger mon CV (PDF) →
+      </a>
+    </div>
+
+    <div class="contact-links reveal">
+      <a class="contact-link" href="mailto:lindasoundja18@gmail.com">
+        ✉ lindasoundja18@gmail.com
+      </a>
+      <a class="contact-link" href="tel:+33758816031">
+        ☎ 07 58 81 60 31
+      </a>
+      <a class="contact-link" href="#">
+        in LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Linda Soundja Moga — Portfolio BUT 3 GEA</span>
+  <span>IUT Paris-Rives de Seine · Université Paris Cité</span>
+</footer>
+
+<script>
+// Cursor
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+function animCursor() {
+  cur.style.left = mx+'px'; cur.style.top = my+'px';
+  rx += (mx-rx)*.12; ry += (my-ry)*.12;
+  ring.style.left = rx+'px'; ring.style.top = ry+'px';
+  requestAnimationFrame(animCursor);
+}
+animCursor();
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e,i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i*80);
+    }
+  });
+}, { threshold: .12 });
+reveals.forEach(el => obs.observe(el));
+
+// Animate bars when visible
+const bars = document.querySelectorAll('.bar-anim');
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const w = e.target.dataset.width;
+      setTimeout(() => { e.target.style.width = w+'%'; }, 300);
+      barObs.unobserve(e.target);
+    }
+  });
+}, { threshold: .3 });
+bars.forEach(b => barObs.observe(b));
+
+// Nav active highlight on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop-100) cur = s.id; });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href')==='#'+cur ? 'var(--blanc)' : '';
+  });
+});
+</script>
+
+</body>
+</html>
