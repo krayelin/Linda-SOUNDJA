@@ -2,7 +2,7 @@
 
 ## 👋 À propos de moi
 
-Je suis **Linda SOUNDJA**, future étudiante en **Master MBFA – parcours Risques, Contrôle et Conformité** à l’:contentReference[oaicite:1]{index=1}, à la recherche d’une **alternance en Contrôle, Audit & Gestion des Risques à partir de septembre 2026**. :contentReference[oaicite:2]{index=2}
+Je suis **Linda*, future étudiante en **Master Contrôle et Audit** à l’:contentReference[oaicite:1]{index=1}, à la recherche d’une **alternance en Contrôle, Audit & Gestion des Risques à partir de septembre 2026**. :contentReference[oaicite:2]{index=2}
 
 Avec **3 ans d’expérience en conformité bancaire et risques LCB-FT**, j’ai développé une solide base en **contrôle interne, analyse des flux financiers, reporting réglementaire et gestion des risques opérationnels**. :contentReference[oaicite:3]{index=3}
 
