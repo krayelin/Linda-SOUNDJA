@@ -967,7 +967,7 @@ const barObs = new IntersectionObserver(entries => {
       const w = e.target.dataset.width;
       setTimeout(() => { e.target.style.width = w+'%'; }, 300);
       barObs.unobserve(e.target);
-    }
+   }
   });
 }, { threshold: .3 });
 bars.forEach(b => barObs.observe(b));
