@@ -124,3 +124,4 @@ Je cherche à contribuer à des missions à fort impact autour de la **maîtrise
 📅 **Alternance — Septembre 2026**  
 
 > “Rigueur, analyse et conformité au service d’une meilleure maîtrise des risques.”
+
